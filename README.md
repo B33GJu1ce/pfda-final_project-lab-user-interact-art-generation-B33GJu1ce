@@ -1,4 +1,4 @@
-# TITLE: User Interaction-Art Generation
+# User Interaction-Art Generation
 
 ## Repository
 <(https://github.com/B33GJu1ce/pfda-final_project-lab-user-interact-art-generation-B33GJu1ce.git)>
