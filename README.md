@@ -1,7 +1,7 @@
 # Final Project Lab: User Interaction-Art Generation
 
 ## Repository
-<Link to your project's public GitHub respository>
+<(https://github.com/B33GJu1ce/pfda-final_project-lab-user-interact-art-generation-B33GJu1ce.git)>
 
 ## Description
 1-2 sentence description of what it will do and how it relevant to media and digital arts.
