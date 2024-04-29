@@ -1,0 +1,32 @@
+import pygame
+import ui
+import artwork
+import export
+
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption("Interactive Art Generator")
+
+    # Initialize user interface
+    ui.init(screen)
+
+    # Main loop
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        # Update user interface
+        ui.update()
+
+        # Draw artwork
+        artwork.draw(screen)
+
+        pygame.display.flip()
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
