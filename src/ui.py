@@ -13,6 +13,10 @@ size_slider_rect = pygame.Rect(50, 150, 200, 20)
 # Initialize mouse_pressed variable
 mouse_pressed = False
 
+# Initialize flags for color button and size slider clicks
+color_button_clicked = False
+size_slider_clicked = False
+
 # Initialize UI elements
 def init(screen):
     # Draw color button
@@ -23,7 +27,7 @@ def init(screen):
 
 # Update UI based on user input
 def update():
-    global mouse_pressed, color_button_rect, size_slider_rect
+    global mouse_pressed, color_button_rect, size_slider_rect, color_button_clicked, size_slider_clicked
 
     # Check for mouse clicks
     mouse_pos = pygame.mouse.get_pos()
@@ -34,12 +38,12 @@ def update():
         mouse_pressed = True
         # Check if mouse click is on the color button
         if color_button_rect.collidepoint(mouse_pos):
-            # Change the color of the circle to a random color
-            new_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-            print("Color button clicked!")
-            return new_color
-        if size_slider_rect.collidepoint(mouse_pos):
-            print("Size slider clicked!")
+            color_button_clicked = True
+        # Check if mouse click is on the size slider
+        elif size_slider_rect.collidepoint(mouse_pos):
+            size_slider_clicked = True
 
     elif mouse_pressed and not mouse_click[0]:
         mouse_pressed = False
+
+    return color_button_clicked, size_slider_clicked

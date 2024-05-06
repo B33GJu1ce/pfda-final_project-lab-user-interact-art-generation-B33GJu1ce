@@ -1,6 +1,7 @@
 import pygame
 import ui
 import artwork
+import random
 
 def main():
     pygame.init()
@@ -8,10 +9,12 @@ def main():
     pygame.display.set_caption("Interactive Art Generator")
 
     # Initialize user interface
-    ui.init(screen)  # Add the screen argument here
+    ui.init(screen)
 
-    # Initialize the color of the circle
-    circle_color = (255, 0, 0)
+    # Initialize circle color, radius, and shape
+    circle_color = (255, 0, 0)  # Initial color is red
+    circle_radius = 50  # Initial radius
+    circle_shape = "circle"  # Initial shape is circle
 
     # Main loop
     running = True
@@ -21,17 +24,28 @@ def main():
                 running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
-                    running = False  # Quit the program if 'Q' is pressed
-
-        # Update user interface and get the new color
-        new_color = ui.update()
-
-        # If a new color is returned, update the circle color
-        if new_color:
-            circle_color = new_color
+                    running = False
+                elif event.key == pygame.K_c:
+                    # Change the color of the circle to a random color
+                    circle_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+                    print("Color changed!")
+                elif event.key == pygame.K_s:
+                    # Change the size of the circle to a random value
+                    circle_radius = random.randint(10, 100)  # Adjust the range of sizes as needed
+                    print("Size changed!")
+                elif event.key == pygame.K_t:
+                    # Change the shape of the circle to square, rectangle, or triangle randomly
+                    shape_random = random.random()
+                    if shape_random < 0.33:
+                        circle_shape = "square"
+                    elif shape_random < 0.66:
+                        circle_shape = "rectangle"
+                    else:
+                        circle_shape = "triangle"
+                    print("Shape changed to", circle_shape)
 
         # Draw artwork
-        artwork.draw(screen, circle_color)
+        artwork.draw(screen, circle_color, circle_radius, circle_shape)
 
         pygame.display.flip()
 
