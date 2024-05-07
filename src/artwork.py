@@ -45,7 +45,6 @@ class Triangle:
         self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
     def change_size(self):
-        # Random size between 50 and 150 (adjust as needed)
         self.size = random.randint(50, 150)
         # Recalculate the points based on the new size
         self.points = [(400, 200), (400 - self.size // 2, 200 + self.size), (400 + self.size // 2, 200 + self.size)]

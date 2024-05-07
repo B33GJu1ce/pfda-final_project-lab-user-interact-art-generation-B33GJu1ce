@@ -12,7 +12,6 @@ def change_background_color():
 # Initialize UI elements
 def init(screen):
     pass  # No need to initialize any UI elements in this version
-
 # Function to display instructions
 def display_instructions():
     print("Press B to change background color")

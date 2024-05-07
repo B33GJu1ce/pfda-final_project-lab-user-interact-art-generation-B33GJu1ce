@@ -57,7 +57,6 @@ def main():
 
         # Draw background color
         screen.fill(background_color)
-
         # Draw the current shape
         if current_shape:
             current_shape.draw(screen)
