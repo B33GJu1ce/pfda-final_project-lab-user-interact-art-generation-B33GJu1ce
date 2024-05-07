@@ -6,7 +6,6 @@ This project is an interactive art generator that allows users to create unique 
 
 - User interface for adjusting parameters such as color, shape, size, and complexity.
 - Visualization of the generated artwork.
-- Option to save or export the artwork in different formats.
 
 ## Installation
 

@@ -4,17 +4,24 @@ import artwork
 import random
 
 def main():
-    pygame.init()
     screen = pygame.display.set_mode((800, 600))
     pygame.display.set_caption("Interactive Art Generator")
 
     # Initialize user interface
     ui.init(screen)
 
-    # Initialize circle color, radius, and shape
-    circle_color = (255, 0, 0)  # Initial color is red
-    circle_radius = 50  # Initial radius
-    circle_shape = "circle"  # Initial shape is circle
+    # Display instructions
+    ui.display_instructions()
+
+    # Initialize background color
+    background_color = (0, 0, 0)  # Initial background color is black
+
+    # Set initial background color
+    screen.fill(background_color)
+    pygame.display.flip()  # Update the screen to show the initial background color
+
+    # Initialize the current shape
+    current_shape = None
 
     # Main loop
     running = True
@@ -25,27 +32,35 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     running = False
-                elif event.key == pygame.K_c:
-                    # Change the color of the circle to a random color
-                    circle_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-                    print("Color changed!")
-                elif event.key == pygame.K_s:
-                    # Change the size of the circle to a random value
-                    circle_radius = random.randint(10, 100)  # Adjust the range of sizes as needed
-                    print("Size changed!")
+                elif event.key == pygame.K_b:
+                    background_color = ui.change_background_color()
+                    print("Background color changed to:", background_color)
+                    screen.fill(background_color)
+                    pygame.display.flip()
+                elif event.key == pygame.K_o:
+                    # Create a new circle object and replace the current shape
+                    current_shape = artwork.Circle()
+                elif event.key == pygame.K_r:
+                    # Create a new square object and replace the current shape
+                    current_shape = artwork.Square()
                 elif event.key == pygame.K_t:
-                    # Change the shape of the circle to square, rectangle, or triangle randomly
-                    shape_random = random.random()
-                    if shape_random < 0.33:
-                        circle_shape = "square"
-                    elif shape_random < 0.66:
-                        circle_shape = "rectangle"
-                    else:
-                        circle_shape = "triangle"
-                    print("Shape changed to", circle_shape)
+                    # Create a new triangle object and replace the current shape
+                    current_shape = artwork.Triangle()
+                elif event.key == pygame.K_s:
+                    # Change the size of the current shape
+                    if current_shape:
+                        current_shape.change_size()
+                elif event.key == pygame.K_c:
+                    # Change the color of the current shape
+                    if current_shape:
+                        current_shape.change_color()
 
-        # Draw artwork
-        artwork.draw(screen, circle_color, circle_radius, circle_shape)
+        # Draw background color
+        screen.fill(background_color)
+
+        # Draw the current shape
+        if current_shape:
+            current_shape.draw(screen)
 
         pygame.display.flip()
 

@@ -1,26 +1,51 @@
 import pygame
+import random
 
-def draw(screen, circle_color, circle_radius, circle_shape):
-    screen.fill((0, 0, 0))  # Clear the screen
+class Circle:
+    def __init__(self):
+        self.color = (0, 0, 255)  # Initial color is blue
+        self.radius = 50  # Initial radius
+        self.center = (400, 300)  # Center of the screen
 
-    # Draw the circle
-    if circle_shape == "circle":
-        pygame.draw.circle(screen, circle_color, (400, 300), circle_radius)
-    elif circle_shape == "square":
-        square_size = circle_radius * 2
-        square_rect = pygame.Rect(400 - circle_radius, 300 - circle_radius, square_size, square_size)
-        pygame.draw.rect(screen, circle_color, square_rect)
-    elif circle_shape == "rectangle":
-        rect_width = circle_radius * 2
-        rect_height = circle_radius * 0.75  # Adjust the aspect ratio as needed
-        rect_rect = pygame.Rect(400 - circle_radius, 300 - circle_radius, rect_width, rect_height)
-        pygame.draw.rect(screen, circle_color, rect_rect)
-    elif circle_shape == "triangle":
-        # Define triangle vertices
-        top_point = (400, 300 - circle_radius)
-        left_point = (400 - int(circle_radius * 0.87), 300 + int(circle_radius * 0.5))
-        right_point = (400 + int(circle_radius * 0.87), 300 + int(circle_radius * 0.5))
-        # Draw the triangle
-        pygame.draw.polygon(screen, circle_color, [top_point, left_point, right_point])
+    def draw(self, screen):
+        pygame.draw.circle(screen, self.color, self.center, self.radius)
 
-    pygame.display.flip()
+    def change_color(self):
+        self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
+    def change_size(self):
+        self.radius = random.randint(10, 100)  # Random radius between 10 and 100
+
+class Square:
+    def __init__(self):
+        self.color = (255, 0, 0)  # Initial color is red
+        self.size = 100  # Initial size (width and height)
+        self.rect = pygame.Rect(350, 250, self.size, self.size)  # Initial position
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, self.color, self.rect)
+
+    def change_color(self):
+        self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
+    def change_size(self):
+        self.size = random.randint(50, 150)  # Random size between 50 and 150
+        self.rect = pygame.Rect(400 - self.size // 2, 300 - self.size // 2, self.size, self.size)
+
+class Triangle:
+    def __init__(self):
+        self.color = (0, 255, 0)  # Initial color is green
+        self.size = 100  # Initial size (base and height)
+        self.points = [(400, 200), (350, 300), (450, 300)]  # Initial points
+
+    def draw(self, screen):
+        pygame.draw.polygon(screen, self.color, self.points)
+
+    def change_color(self):
+        self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
+    def change_size(self):
+        # Random size between 50 and 150 (adjust as needed)
+        self.size = random.randint(50, 150)
+        # Recalculate the points based on the new size
+        self.points = [(400, 200), (400 - self.size // 2, 200 + self.size), (400 + self.size // 2, 200 + self.size)]
